@@ -1,0 +1,1 @@
+import{c as a,a as s,b as t,N as n,F as o,o as r}from"./index-DRmCyWPS.js";const m={__name:"MenuView",setup(c){return(l,e)=>(r(),a(o,null,[e[0]||(e[0]=s("section",{class:"container"},null,-1)),t(n)],64))}};export{m as default};

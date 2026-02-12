@@ -14,10 +14,10 @@ import BaseIcon from './BaseIcon.vue'
       Соц.Мережі
     </RouterLink>
 
-    <RouterLink to="/menu" class="nav__item" active-class="active">
+    <!-- <RouterLink to="/menu" class="nav__item" active-class="active">
       <BaseIcon class="nav__item-icon" name="menu" size="24" />
       Меню
-    </RouterLink>
+    </RouterLink> -->
   </nav>
 </template>
 
