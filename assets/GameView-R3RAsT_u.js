@@ -1,1 +1,0 @@
-import{c as a,a as s,b as t,N as o,F as n,o as r}from"./index-B9qLATQ1.js";const p={__name:"GameView",setup(c){return(l,e)=>(r(),a(n,null,[e[0]||(e[0]=s("section",{class:"container"},null,-1)),t(o)],64))}};export{p as default};
