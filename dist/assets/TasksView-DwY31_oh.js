@@ -1,1 +1,0 @@
-import{c as a,a as s,b as t,N as o,F as n,o as r}from"./index-DRmCyWPS.js";const p={__name:"TasksView",setup(c){return(l,e)=>(r(),a(n,null,[e[0]||(e[0]=s("section",{class:"container"},null,-1)),t(o)],64))}};export{p as default};

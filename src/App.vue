@@ -1,36 +1,42 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import { onMounted } from 'vue'
-import InfoToast from '@/components/InfoToast.vue'
-onMounted(async () => {
+import { onMounted, provide } from 'vue'
+
+let tg = null
+
+onMounted(() => {
   if (window.Telegram?.WebApp) {
-    const webApp = window.Telegram.WebApp
+    tg = window.Telegram.WebApp
 
+    tg.ready()
+    tg.expand()
+    tg.disableVerticalSwipes()
 
-    webApp.ready()
-    webApp.expand()
-    webApp.disableVerticalSwipes()
-
-    const isMobile =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      )
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
 
     if (isMobile) {
-      webApp.requestFullscreen()
-      webApp.setBottomBarColor('#242424')
+      tg.requestFullscreen()
+      tg.setBottomBarColor('#242424')
     }
   } else {
     console.log('Telegram WebApp не найден (локальный запуск)')
   }
 })
+
+/* --- HAPTIC FUNCTION --- */
+const haptic = (type = 'light') => {
+  if (tg?.HapticFeedback) {
+    tg.HapticFeedback.impactOccurred(type)
+  }
+}
+
+/* Робимо доступним у всіх компонентах */
+provide('haptic', haptic)
 </script>
+
 
 <template>
   <RouterView />
-  <InfoToast />
 </template>
-
-<style scoped>
-
-</style>

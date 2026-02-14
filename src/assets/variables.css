@@ -10,7 +10,8 @@
   --grey: #b3b3b3;
   --btn-grey: #464646;
   --white: #fff;
-  --color-mute: rgba(255, 255, 255, 0.1);
+  --color-mute: rgba(255, 255, 255, 0.3);
+  --animate-delay: 0.5s !important;
 }
 :root {
   --font-sans: 'Proxima Nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;

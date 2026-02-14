@@ -1,23 +1,42 @@
 <script setup>
 import BaseIcon from './BaseIcon.vue'
+import { inject } from 'vue'
+const haptic = inject('haptic')
 </script>
 
 <template>
   <nav class="nav">
-    <RouterLink to="/" class="nav__item" exact-active-class="active">
-      <BaseIcon class="nav__item-icon" name="donate" size="24" />
-      Донат
-    </RouterLink>
+    <div class="nav__wrapper">
+      <RouterLink
+        to="/"
+        class="nav__item"
+        exact-active-class="active"
+        @pointerdown="haptic && haptic('light')"
+      >
+        <BaseIcon class="nav__item-icon" name="donate" size="24" />
+        Донат
+      </RouterLink>
 
-    <RouterLink to="/tasks" class="nav__item" active-class="active">
-      <BaseIcon class="nav__item-icon" name="socials" size="24" />
-      Соц.Мережі
-    </RouterLink>
-
-    <!-- <RouterLink to="/menu" class="nav__item" active-class="active">
-      <BaseIcon class="nav__item-icon" name="menu" size="24" />
-      Меню
-    </RouterLink> -->
+      <RouterLink
+        to="/tasks"
+        class="nav__item"
+        active-class="active"
+        @pointerdown="haptic && haptic('light')"
+      >
+        <BaseIcon class="nav__item-icon" name="socials" size="24" />
+        Соц.Мережі
+      </RouterLink>
+    </div>
+    <div class="nav__wrapper">
+      <RouterLink
+        to="/game"
+        class="nav__item sm"
+        active-class="active"
+        @pointerdown="haptic && haptic('light')"
+      >
+        <BaseIcon class="nav__item-icon" name="game" size="24" />
+      </RouterLink>
+    </div>
   </nav>
 </template>
 
@@ -25,16 +44,29 @@ import BaseIcon from './BaseIcon.vue'
 .nav {
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 95%;
   gap: 0.125rem;
-  border-radius: 6.25rem;
-  padding: 0.25rem;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: var(--tg-safe-area-inset-bottom);
-  position: relative;
-  background: var(--background-elements-darker);
-  backdrop-filter: blur(5px);
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1%;
+}
+.nav__wrapper {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(0.625rem);
+  border-radius: 6.25rem;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.03);
+  padding: 0.25rem;
+}
+.sm {
+  width: 3.375rem !important;
+}
+:deep(.base-icon) {
+  flex-shrink: 0;
 }
 .nav__item {
   flex-grow: 1;
@@ -73,10 +105,10 @@ import BaseIcon from './BaseIcon.vue'
     transform: translateY(0) scale(1);
   }
   60% {
-    transform: scale(1.12);
+    transform: scale(1.13);
   }
   100% {
-    transform: scale(1.08);
+    transform: scale(1.09);
   }
 }
 
