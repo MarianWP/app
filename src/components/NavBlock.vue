@@ -11,7 +11,7 @@ const haptic = inject('haptic')
         to="/"
         class="nav__item"
         exact-active-class="active"
-        @pointerdown="haptic && haptic('light')"
+        @pointerdown="haptic && haptic('medium')"
       >
         <BaseIcon class="nav__item-icon" name="donate" size="24" />
         Донат
@@ -21,7 +21,7 @@ const haptic = inject('haptic')
         to="/tasks"
         class="nav__item"
         active-class="active"
-        @pointerdown="haptic && haptic('light')"
+        @pointerdown="haptic && haptic('medium')"
       >
         <BaseIcon class="nav__item-icon" name="socials" size="24" />
         Соц.Мережі
@@ -32,7 +32,7 @@ const haptic = inject('haptic')
         to="/game"
         class="nav__item sm"
         active-class="active"
-        @pointerdown="haptic && haptic('light')"
+        @pointerdown="haptic && haptic('medium')"
       >
         <BaseIcon class="nav__item-icon" name="game" size="24" />
       </RouterLink>
@@ -59,7 +59,7 @@ const haptic = inject('haptic')
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(0.625rem);
   border-radius: 6.25rem;
-  border: 0.0625rem solid rgba(255, 255, 255, 0.03);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.05);
   padding: 0.25rem;
 }
 .sm {

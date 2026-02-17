@@ -83,7 +83,7 @@ defineProps({
 }
 
 .donat {
-  background: linear-gradient(158deg, #1c1c1c 0%, #0c0c0c 100%);
+  background: linear-gradient(117deg, #152035 0%, #1c1a3e 56.48%, #201843 65.45%, #2d0065 100%);
 }
 
 .element-top {

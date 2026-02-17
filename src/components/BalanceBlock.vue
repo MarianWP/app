@@ -1,22 +1,14 @@
 <script setup>
+import { computed, inject, ref } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
-let coins = 5
+
+const coinsRef = inject('coins', ref(0))
+const displayCoins = computed(() => Number(coinsRef?.value ?? 0))
 </script>
 
 <template>
-  <div class="balance">
-    <BaseIcon name="coins" size="24" />
-    <span>{{ coins }}</span>
+  <div class="balance-wrapper">
+    <p>Монети</p>
+    <div class="balance"><BaseIcon name="coins" size="24" /> {{ displayCoins }}</div>
   </div>
 </template>
-
-<style scoped>
-.balance {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  font-size: 18px;
-  color: #fff;
-}
-</style>
