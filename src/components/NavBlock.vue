@@ -26,15 +26,14 @@ const haptic = inject('haptic')
         <BaseIcon class="nav__item-icon" name="socials" size="24" />
         Соц.Мережі
       </RouterLink>
-    </div>
-    <div class="nav__wrapper">
       <RouterLink
-        to="/game"
-        class="nav__item sm"
-        active-class="active"
+        to="/map"
+        class="nav__item"
+        exact-active-class="active"
         @pointerdown="haptic && haptic('medium')"
       >
-        <BaseIcon class="nav__item-icon" name="game" size="24" />
+        <BaseIcon class="nav__item-icon" name="map" size="24" />
+        Карта України
       </RouterLink>
     </div>
   </nav>

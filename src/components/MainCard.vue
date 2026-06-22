@@ -101,6 +101,7 @@ defineProps({
 }
 
 .element-info {
+  white-space: nowrap;
   font-size: 0.75rem;
   text-transform: uppercase;
   padding: 0.25rem 0.5rem;
