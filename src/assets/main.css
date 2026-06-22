@@ -80,7 +80,7 @@ section {
 }
 /* Header */
 .header {
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   /* background-color: var(--background-elements-darker); */
   height: fit-content;
@@ -417,4 +417,10 @@ section {
   justify-content: center;
   gap: 0.25rem;
   color: #fff;
+}
+.logo {
+  margin-bottom: 1rem;
+}
+.logo svg {
+  width: 6.25rem;
 }

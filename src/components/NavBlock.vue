@@ -1,40 +1,88 @@
 <script setup>
 import BaseIcon from './BaseIcon.vue'
 import { inject } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
 const haptic = inject('haptic')
+const route = useRoute()
+const router = useRouter()
+
+const items = [
+  { to: '/', icon: 'donate', label: 'Донат' },
+  { to: '/tasks', icon: 'socials', label: 'Соц.Мережі' },
+  { to: '/map', icon: 'map', label: 'Карта України' },
+]
+
+const MOVE_THRESHOLD = 10 // px — больше = считаем жестом/скроллом, не кликом
+
+let startX = 0
+let startY = 0
+let moved = false
+let canceled = false
+let pointerNavigated = false
+
+function isActive(to) {
+  return route.path === to
+}
+
+function go(to) {
+  if (route.path !== to) router.push(to)
+}
+
+function onPointerDown(e) {
+  startX = e.clientX
+  startY = e.clientY
+  moved = false
+  canceled = false
+  if (haptic) haptic('medium')
+}
+
+function onPointerMove(e) {
+  if (Math.abs(e.clientX - startX) > MOVE_THRESHOLD || Math.abs(e.clientY - startY) > MOVE_THRESHOLD) {
+    moved = true
+  }
+}
+
+function onPointerCancel() {
+  canceled = true
+}
+
+function onPointerUp(to) {
+  if (canceled || moved) return
+  // навигируем сразу по pointerup, не дожидаясь click (который может быть подавлен)
+  pointerNavigated = true
+  go(to)
+  // сбрасываем флаг, чтобы последующий keyboard/mouse click работал
+  setTimeout(() => {
+    pointerNavigated = false
+  }, 0)
+}
+
+function onClick(to) {
+  // fallback для клавиатуры/мыши, когда pointerup уже не навигировал
+  if (pointerNavigated) return
+  go(to)
+}
 </script>
 
 <template>
   <nav class="nav">
     <div class="nav__wrapper">
-      <RouterLink
-        to="/"
+      <button
+        v-for="item in items"
+        :key="item.to"
+        type="button"
         class="nav__item"
-        exact-active-class="active"
-        @pointerdown="haptic && haptic('medium')"
+        :class="{ active: isActive(item.to) }"
+        @pointerdown="onPointerDown"
+        @pointermove="onPointerMove"
+        @pointercancel="onPointerCancel"
+        @pointerup="onPointerUp(item.to)"
+        @click="onClick(item.to)"
       >
-        <BaseIcon class="nav__item-icon" name="donate" size="24" />
-        Донат
-      </RouterLink>
-
-      <RouterLink
-        to="/tasks"
-        class="nav__item"
-        active-class="active"
-        @pointerdown="haptic && haptic('medium')"
-      >
-        <BaseIcon class="nav__item-icon" name="socials" size="24" />
-        Соц.Мережі
-      </RouterLink>
-      <RouterLink
-        to="/map"
-        class="nav__item"
-        exact-active-class="active"
-        @pointerdown="haptic && haptic('medium')"
-      >
-        <BaseIcon class="nav__item-icon" name="map" size="24" />
-        Карта України
-      </RouterLink>
+        <BaseIcon class="nav__item-icon" :name="item.icon" size="24" />
+        {{ item.label }}
+      </button>
     </div>
   </nav>
 </template>
@@ -55,7 +103,7 @@ const haptic = inject('haptic')
 }
 .nav__wrapper {
   display: flex;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(0.625rem);
   border-radius: 6.25rem;
   border: 0.0625rem solid rgba(255, 255, 255, 0.05);
@@ -80,6 +128,16 @@ const haptic = inject('haptic')
   color: var(--grey);
   font-size: clamp(0.875rem, 0.7rem + 0.25vw, 1rem);
   width: 100%;
+  /* сброс стилей button + надёжный тап */
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  text-align: left;
 }
 
 :deep(.nav__item svg) {
@@ -125,6 +183,8 @@ const haptic = inject('haptic')
     gap: 0.125rem;
     flex-direction: column;
     flex-grow: 0;
+    font-size: 0.75rem;
+    text-align: center;
   }
 }
 </style>

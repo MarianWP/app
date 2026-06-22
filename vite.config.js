@@ -1,4 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
+import { copyFileSync, existsSync } from 'node:fs'
+import { resolve } from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -31,6 +33,15 @@ export default defineConfig({
             2
           ),
         })
+      },
+      // SPA-фолбэк для GitHub Pages: 404.html = копия index.html,
+      // чтобы прямые ссылки/перезагрузка на /map, /tasks не давали 404.
+      writeBundle(options) {
+        const outDir = options.dir || resolve(fileURLToPath(new URL('./dist', import.meta.url)))
+        const indexFile = resolve(outDir, 'index.html')
+        if (existsSync(indexFile)) {
+          copyFileSync(indexFile, resolve(outDir, '404.html'))
+        }
       },
     },
   ],
