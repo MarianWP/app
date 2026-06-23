@@ -21,13 +21,6 @@ import MainCard from '@/components/MainCard.vue'
     <div class="cards-list">
       <MainCard
         class="animate__animated animate__fadeInUp animate__delay-1s"
-        href="https://ukrmap.me/release_time"
-        title="Таймер релізу"
-        description="Коли вийде у відкритий доступ"
-        backgroundVariant="monodonat"
-      />
-      <MainCard
-        class="animate__animated animate__fadeInUp animate__delay-1s"
         href="https://ukrmap.me/"
         title="Сайт карти"
         description="Вийде після релізу, зі всією інформацією з отримання карти"
