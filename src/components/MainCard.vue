@@ -1,6 +1,9 @@
 <script setup>
 import BaseIcon from './BaseIcon.vue'
 import { trackEvent } from '@/lib/analytics'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const props = defineProps({
   href: {
@@ -39,7 +42,8 @@ const props = defineProps({
 
 function onCardClick() {
   trackEvent('card_click', {
-    title: props.title,
+    page: route.meta?.analyticsName || route.name || route.path, // donate / socials / map
+    title: props.title, // напр. Youtube, Monobank, Сайт карти
     url: props.href,
     variant: props.backgroundVariant,
   })

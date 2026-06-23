@@ -27,12 +27,14 @@ export function initAnalytics() {
   enabled = true
 }
 
-export function trackPageView(path, title) {
+export function trackPageView(path, title, name) {
   if (!enabled || !window.gtag) return
   window.gtag('event', 'page_view', {
     page_path: path,
     page_title: title || document.title,
     page_location: window.location.href,
+    // человекочитаемое имя экрана: donate / socials / map
+    ...(name ? { page_name: name } : {}),
   })
 }
 

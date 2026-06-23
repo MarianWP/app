@@ -8,6 +8,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: { analyticsName: 'donate', title: 'Донат' },
     },
     {
       path: '/tasks',
@@ -16,6 +17,7 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../pages/SocialsView.vue'),
+      meta: { analyticsName: 'socials', title: 'Соц.Мережі' },
     },
     {
       path: '/map',
@@ -24,6 +26,7 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../pages/MapView.vue'),
+      meta: { analyticsName: 'map', title: 'Карта України' },
     },
   ],
 })

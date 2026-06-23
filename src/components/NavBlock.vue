@@ -9,9 +9,9 @@ const route = useRoute()
 const router = useRouter()
 
 const items = [
-  { to: '/', icon: 'donate', label: 'Донат' },
-  { to: '/tasks', icon: 'socials', label: 'Соц.Мережі' },
-  { to: '/map', icon: 'map', label: 'Карта України' },
+  { to: '/', id: 'donate', icon: 'donate', label: 'Донат' },
+  { to: '/tasks', id: 'socials', icon: 'socials', label: 'Соц.Мережі' },
+  { to: '/map', id: 'map', icon: 'map', label: 'Карта України' },
 ]
 
 const MOVE_THRESHOLD = 10 // px — больше = считаем жестом/скроллом, не кликом
@@ -29,7 +29,11 @@ function isActive(to) {
 function go(to) {
   if (route.path === to) return
   const item = items.find((i) => i.to === to)
-  trackEvent('nav_click', { to, label: item ? item.label : to })
+  trackEvent('nav_click', {
+    nav_id: item ? item.id : to, // donate / socials / map
+    to,
+    label: item ? item.label : to,
+  })
   router.push(to)
 }
 

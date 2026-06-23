@@ -46,7 +46,10 @@ async function bootstrap() {
   // аналитика: инициализация + page_view при каждой смене роута (SPA)
   initAnalytics()
   router.afterEach((to) => {
-    trackPageView(to.fullPath)
+    const title = to.meta?.title
+    const name = to.meta?.analyticsName
+    if (title) document.title = `MARIK APP — ${title}`
+    trackPageView(to.fullPath, title, name)
   })
 
   app.mount('#app')
