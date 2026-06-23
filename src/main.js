@@ -3,6 +3,7 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { initAnalytics, trackPageView } from './lib/analytics'
 
 async function ensureFreshBuild() {
   const currentBuildId = String(__APP_BUILD_ID__)
@@ -41,6 +42,13 @@ async function bootstrap() {
 
   const app = createApp(App)
   app.use(router)
+
+  // аналитика: инициализация + page_view при каждой смене роута (SPA)
+  initAnalytics()
+  router.afterEach((to) => {
+    trackPageView(to.fullPath)
+  })
+
   app.mount('#app')
 }
 

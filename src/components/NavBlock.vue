@@ -2,6 +2,7 @@
 import BaseIcon from './BaseIcon.vue'
 import { inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { trackEvent } from '@/lib/analytics'
 
 const haptic = inject('haptic')
 const route = useRoute()
@@ -26,7 +27,10 @@ function isActive(to) {
 }
 
 function go(to) {
-  if (route.path !== to) router.push(to)
+  if (route.path === to) return
+  const item = items.find((i) => i.to === to)
+  trackEvent('nav_click', { to, label: item ? item.label : to })
+  router.push(to)
 }
 
 function onPointerDown(e) {

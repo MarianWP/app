@@ -1,6 +1,8 @@
 <script setup>
 import BaseIcon from './BaseIcon.vue'
-defineProps({
+import { trackEvent } from '@/lib/analytics'
+
+const props = defineProps({
   href: {
     type: String,
     required: true,
@@ -34,6 +36,14 @@ defineProps({
     default: true,
   },
 })
+
+function onCardClick() {
+  trackEvent('card_click', {
+    title: props.title,
+    url: props.href,
+    variant: props.backgroundVariant,
+  })
+}
 </script>
 
 <template>
@@ -43,6 +53,7 @@ defineProps({
     :rel="external ? 'noopener noreferrer' : null"
     class="main-element"
     :class="backgroundVariant"
+    @click="onCardClick"
   >
     <div class="element-top">
       <div class="element-title">{{ title }}</div>
