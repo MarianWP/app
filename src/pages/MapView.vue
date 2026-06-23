@@ -9,7 +9,7 @@ import MainCard from '@/components/MainCard.vue'
     <HeaderBlock>
       <div class="text-head">
         <div class="line">НОВА КАРТА УКРАЇНИ?</div>
-        <div class="line"><span>UKRAINE REBORN</span></div>
+        <div class="line"><span>UKRMAP <span style="color:#FACC15">REBORN</span></span></div>
       </div>
       <div class="release-badge-wrap animate__animated animate__fadeInUp animate__delay-1s">
         <div class="release-badge">
