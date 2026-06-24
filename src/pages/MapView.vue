@@ -14,7 +14,7 @@ import MainCard from '@/components/MainCard.vue'
       <div class="release-badge-wrap animate__animated animate__fadeInUp animate__delay-1s">
         <div class="release-badge">
           <span class="release-badge__dot"></span>
-          <span class="release-badge__text">Реліз 24 червня</span>
+          <span class="release-badge__text">Вже доступна за посиланням</span>
         </div>
       </div>
     </HeaderBlock>
@@ -23,7 +23,7 @@ import MainCard from '@/components/MainCard.vue'
         class="animate__animated animate__fadeInUp animate__delay-1s"
         href="https://ukrmap.me/"
         title="Сайт карти"
-        description="Вийде після релізу, зі всією інформацією з отримання карти"
+        description="Переходи на сайт та ознайомлюйся з деталями"
         backgroundVariant="monodonat"
       />
     </div>
@@ -35,6 +35,7 @@ import MainCard from '@/components/MainCard.vue'
 .release-badge-wrap {
   display: inline-block;
   margin-top: 0.875rem;
+  width: 100%;
 }
 
 .release-badge {
